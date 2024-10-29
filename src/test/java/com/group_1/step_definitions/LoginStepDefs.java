@@ -1,9 +1,41 @@
 package com.group_1.step_definitions;
 
 import com.group_1.pages.LoginPage;
+import com.group_1.utilities.BrowserUtils;
 import com.group_1.utilities.ConfigurationReader;
+import com.group_1.utilities.Driver;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import org.junit.Assert;
+
 public class LoginStepDefs {
+    LoginPage loginPage = new LoginPage();
+
+    @Given("user goes to login page")
+    public void user_goes_to_login_page() {
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+
+    }
+    @Then("user types username")
+    public void user_types_username() {
+        loginPage.userName.sendKeys("hr1@cydeo.com");
+
+    }
+    @Then("user types password")
+    public void user_types_password() {
+        loginPage.password.sendKeys("UserUser");
+    }
+    @Then("user clicks login button")
+    public void user_clicks_login_button() {
+        loginPage.loginButton.click();
+    }
+    @Then("Verify if user on the dashboard")
+    public void verify_if_user_on_the_dashboard() {
+        BrowserUtils.verifyElementDisplayed(loginPage.CRM24);
+       // Assert.assertTrue(loginPage.CRM24.isDisplayed());
+    }
+
+
 
     /**
      * WEBPAGE USED FOR THIS CODE BELOW IS : https://vytrack.com/
