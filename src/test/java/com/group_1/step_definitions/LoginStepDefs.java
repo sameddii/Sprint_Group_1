@@ -10,104 +10,122 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-public class LoginStepDefs {
+import static org.junit.Assert.assertEquals;
 
+public class LoginStepDefs {
 
     LoginPage loginPage = new LoginPage();
 
-    @Given("user go to login page")
-    public void user_go_to_login_page() {
+    @Given("the user is on the login page")
+    public void the_user_is_on_the_login_page() {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
     }
 
-    @When("user enter {string}")
-    public void userEnter(String email) {
-        loginPage.userName.sendKeys(email);
+    @Given("the user logs in as {string}")
+    public void the_user_logs_in_as(String userType) {
+        loginPage.login(userType);
     }
 
-    @And("user enter password")
-    public void userEnterPassword() {
-        loginPage.password.sendKeys(ConfigurationReader.getProperty("password"));
-    }
-
-    @When("user click login button")
-    public void userClickLoginButton() {
-        loginPage.loginButton.click();
+    @Then("the user should land on the home page and the {string} should be displayed")
+    public void the_user_should_land_on_the_home_page_and_the_should_be_displayed(String expectedTitle) {
+        String actualTitle = Driver.getDriver().getTitle();
+        assertEquals(expectedTitle, actualTitle);
     }
 
 
-    @Then("user should land on the page")
-    public void userShouldLandOnThePage() {
-        Assert.assertTrue(loginPage.activity.isDisplayed());
-    }
+    //Login with valid username and invalid password
+    @When("the user enters a valid {string} and an invalid {string}")
+    public void the_user_enters_a_valid_and_an_invalid(String username, String password) {
+        String userName = "";
 
-    @When("user enter {string},{string}")
-    public void userEnter(String email, String pass) {
-        loginPage.userName.sendKeys(email);
-        loginPage.password.sendKeys(pass);
-    }
-
-    @Then("user should see the message")
-    public void userShouldSeeTheMessage() {
-        String expectedMessage = "Incorrect login or password";
-        String actualMessage = loginPage.errorMessage.getText();
-
-        Assert.assertEquals(expectedMessage,actualMessage);
-    }
-
-    @Given("the checkbox is enabled")
-    public void theCheckboxIsEnabled() {
-        Assert.assertTrue(loginPage.rememberCheckbox.isEnabled());
-    }
-
-    @Then("user click the checkbox")
-    public void userClickTheCheckbox() {
-        loginPage.rememberCheckbox.click();
-    }
-
-
-
-
-
-    /**
-     * WEBPAGE USED FOR THIS CODE BELOW IS : https://vytrack.com/
-     * Code is commented out becuase we will not use this PAGE
-     */
-
-    /*
-    @Given("the user is on the login page")
-    public void the_user_is_on_the_login_page() {
-        System.out.println("Login to app in Before method");
-    }
-
-    @Given("the user logged in as {string}")
-    public void the_user_logged_in_as(String userType) {
-        //based on input enter that user information
-        String username =null;
-        String password =null;
-
-        if(userType.equalsIgnoreCase("driver")){
-            username = ConfigurationReader.getProperty("driver_username");
-            password = ConfigurationReader.getProperty("driver_password");
-        }else if(userType.equalsIgnoreCase("sales manager")){
-            username = ConfigurationReader.getProperty("sales_manager_username");
-            password = ConfigurationReader.getProperty("sales_manager_password");
-        }else if(userType.equalsIgnoreCase("store manager")){
-            username = ConfigurationReader.getProperty("store_manager_username");
-            password = ConfigurationReader.getProperty("store_manager_password");
+        switch (username) {
+            case "hrUser":
+                userName = ConfigurationReader.getProperty("hr_username");
+                break;
+            case "helpdeskUser":
+                userName = ConfigurationReader.getProperty("helpdesk_username");
+                break;
+            case "marketingUser":
+                userName = ConfigurationReader.getProperty("marketing_username");
+                break;
+            default:
+                System.out.println("Invalid user type");
+                break;
         }
-        //send username and password and login
-        new LoginPage().login(username,password);
+
+        loginPage.invalidLogin(userName, password);
     }
 
-    @Given("the user logged in with username as {string} and password as {string}")
-    public void the_user_logged_in_with_username_as_and_password_as(String username, String password) {
-      LoginPage loginPage=new LoginPage();
-      loginPage.login(username,password);
+    @Then("the {string} should be displayed")
+    public void the_should_be_displayed(String expectedErrorMessage) {
+        String actualErrorMessage = loginPage.errorMessage.getText();
+        assertEquals(expectedErrorMessage, actualErrorMessage);
     }
 
-*/
+    //Login with invalid username and valid password
+    @When("the user enters an invalid {string} and a valid {string}")
+    public void the_user_enters_an_invalid_and_a_valid(String username, String Password) {
+        String password = "";
 
+        switch (Password) {
+            case "hrUser":
+                password = ConfigurationReader.getProperty("hr88@cydeo.com");
+                break;
+            case "helpdeskUser":
+                password = ConfigurationReader.getProperty("helpdesk_password");
+                break;
+            case "marketingUser":
+                password = ConfigurationReader.getProperty("marketing_password");
+                break;
+            default:
+                System.out.println("Invalid user type");
+                break;
+        }
+
+        loginPage.invalidLogin(username, password);
+    }
+
+    //Login attempt with empty credentials
+    @When("the user logs in with missing {string} and_or {string} fields")
+    public void the_user_logs_in_with_missing_and_or_fields(String username,String password) {
+
+        if (password.isEmpty()) {
+            username = ConfigurationReader.getProperty("hr_username");
+            loginPage.invalidLogin(username, password);
+        }
+        if (username.isEmpty()) {
+            password = ConfigurationReader.getProperty("helpdesk_password");
+            loginPage.invalidLogin(username, password);
+        } else {
+            loginPage.invalidLogin(username, password);
+        }
+    }
+
+    //Verify "Remember me" option is visible and clickable
+    @Then("the {string} text should be visible")
+    public void the_text_should_be_visible(String string) {
+
+    }
+
+    @When("the user clicks the Remember me checkbox")
+    public void the_user_clicks_the_remember_me_checkbox() {
+
+    }
+
+    @Then("the Remember me checkbox should be selected")
+    public void the_remember_me_checkbox_should_be_selected() {
+
+    }
+
+    //Verify password is hidden by default
+    @When("the user enters a password")
+    public void the_user_enters_a_password() {
+
+    }
+    @Then("the password should be masked with bullets by default")
+    public void the_password_should_be_masked_with_bullets_by_default() {
+
+    }
 
 
 }
