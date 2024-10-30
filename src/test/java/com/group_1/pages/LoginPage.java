@@ -1,7 +1,6 @@
 package com.group_1.pages;
 
-
-import com.group_1.utilities.BrowserUtils;
+import com.group_1.utilities.ConfigurationReader;
 import com.group_1.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,38 +12,52 @@ public class LoginPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(name="USER_LOGIN")
+    @FindBy(name = "USER_LOGIN")
     public WebElement userName;
 
-    @FindBy(name="USER_PASSWORD")
+    @FindBy(name = "USER_PASSWORD")
     public WebElement password;
 
-    @FindBy(id="logo_24_text")
-    public WebElement CRM24;
-
-    @FindBy(xpath="//input[@type ='submit']")
-    public WebElement loginButton;
-
-
-
-    /// These locators below are commented out becuase they belong to : https://vytrack.com/
-    /*
-    @FindBy(id="prependedInput")
-    public WebElement userName;
-
-    @FindBy(id="prependedInput2")
-    public WebElement password;
-
-    @FindBy(name = "_submit")
+    @FindBy(className = "login-btn")
     public WebElement submit;
-*/
 
-    /// re-usable method
-//    public void login(String userNameStr, String passwordStr) {
-//   userName.sendKeys(userNameStr);
-//    password.sendKeys(passwordStr);
-//        submit.click();
-//            // verification that we logged
-//}
+    @FindBy(css = "div[class='errortext']")
+    public WebElement errorMessage;
+
+
+    public void login(String userType) {
+        String userName = "";
+        String password = "";
+
+        switch (userType.toLowerCase()) {
+            case "hr":
+                userName = ConfigurationReader.getProperty("hr_username");
+                password = ConfigurationReader.getProperty("hr_password");
+                break;
+            case "helpdesk":
+                userName = ConfigurationReader.getProperty("helpdesk_username");
+                password = ConfigurationReader.getProperty("helpdesk_password");
+                break;
+            case "marketing":
+                userName = ConfigurationReader.getProperty("marketing_username");
+                password = ConfigurationReader.getProperty("marketing_password");
+                break;
+            default:
+                System.out.println("Invalid user type");
+                break;
+        }
+        this.userName.sendKeys(userName);
+        this.password.sendKeys(password);
+        this.submit.click();
+    }
+
+    public void invalidLogin(String userName, String password) {
+        this.userName.sendKeys(userName);
+        this.password.sendKeys(password);
+        this.submit.click();
+    }
+
+
+
 
 }
