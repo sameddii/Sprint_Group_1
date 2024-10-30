@@ -1,3 +1,4 @@
+@services
 Feature: Services page feature
   User story: As a user, I should be able to access  the “Services” page
   Acceptance criteria :
