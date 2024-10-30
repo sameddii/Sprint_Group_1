@@ -4,36 +4,68 @@ import com.group_1.pages.LoginPage;
 import com.group_1.utilities.BrowserUtils;
 import com.group_1.utilities.ConfigurationReader;
 import com.group_1.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 public class LoginStepDefs {
+
+
     LoginPage loginPage = new LoginPage();
 
-    @Given("user goes to login page")
-    public void user_goes_to_login_page() {
+    @Given("user go to login page")
+    public void user_go_to_login_page() {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+    }
 
+    @When("user enter {string}")
+    public void userEnter(String email) {
+        loginPage.userName.sendKeys(email);
     }
-    @Then("user types username")
-    public void user_types_username() {
-        loginPage.userName.sendKeys("hr1@cydeo.com");
 
+    @And("user enter password")
+    public void userEnterPassword() {
+        loginPage.password.sendKeys(ConfigurationReader.getProperty("password"));
     }
-    @Then("user types password")
-    public void user_types_password() {
-        loginPage.password.sendKeys("UserUser");
-    }
-    @Then("user clicks login button")
-    public void user_clicks_login_button() {
+
+    @When("user click login button")
+    public void userClickLoginButton() {
         loginPage.loginButton.click();
     }
-    @Then("Verify if user on the dashboard")
-    public void verify_if_user_on_the_dashboard() {
-        BrowserUtils.verifyElementDisplayed(loginPage.CRM24);
-       // Assert.assertTrue(loginPage.CRM24.isDisplayed());
+
+
+    @Then("user should land on the page")
+    public void userShouldLandOnThePage() {
+        Assert.assertTrue(loginPage.activity.isDisplayed());
     }
+
+    @When("user enter {string},{string}")
+    public void userEnter(String email, String pass) {
+        loginPage.userName.sendKeys(email);
+        loginPage.password.sendKeys(pass);
+    }
+
+    @Then("user should see the message")
+    public void userShouldSeeTheMessage() {
+        String expectedMessage = "Incorrect login or password";
+        String actualMessage = loginPage.errorMessage.getText();
+
+        Assert.assertEquals(expectedMessage,actualMessage);
+    }
+
+    @Given("the checkbox is enabled")
+    public void theCheckboxIsEnabled() {
+        Assert.assertTrue(loginPage.rememberCheckbox.isEnabled());
+    }
+
+    @Then("user click the checkbox")
+    public void userClickTheCheckbox() {
+        loginPage.rememberCheckbox.click();
+    }
+
+
 
 
 

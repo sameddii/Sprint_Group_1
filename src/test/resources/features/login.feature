@@ -4,13 +4,36 @@ Feature: User story : As a user, I should be able to login.
     Verify that user can log in with valid credentials and lands on the home page after successful login.
     Verify that "Incorrect username or password." message is displayed after invalid login attempt.
 
-  @login
-  Scenario: Verify that user can log in with valid credentials and lands on the home page after successful login.
-    Given user goes to login page
-    Then user types username
-    And user types password
-    Then user clicks login button
-    And Verify if user on the dashboard
+  Background: login to the page
+    Given user go to login page
+
+
+  @wip
+  Scenario Outline: login with valid credentials
+    When user enter "<email>"
+    And user enter password
+    When user click login button
+    Then user should land on the page
+
+    Examples:
+      | email                 |
+      | helpdesk22@cydeo.com  |
+      | hr3@cydeo.com         |
+      | marketing47@cydeo.com |
+
+
+  @wip1
+  Scenario Outline: verify message is displayed for failed attempts
+    When user enter "<email>","<password>"
+    And user click login button
+    Then user should see the message
+
+
+    Examples:
+      | email                | password |
+      |                      |          |
+      | helpdesk13@cydeo.com |          |
+      |                      | UserUser |
 
 
 

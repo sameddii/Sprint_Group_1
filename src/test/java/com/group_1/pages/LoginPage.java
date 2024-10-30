@@ -19,11 +19,20 @@ public class LoginPage {
     @FindBy(name="USER_PASSWORD")
     public WebElement password;
 
-    @FindBy(id="logo_24_text")
-    public WebElement CRM24;
-
     @FindBy(xpath="//input[@type ='submit']")
     public WebElement loginButton;
+
+    @FindBy(xpath = "//div[@class='pagetitle']")
+    public WebElement activity;
+
+    @FindBy(xpath = "//div[@class='errortext']")
+    public WebElement errorMessage;
+
+    @FindBy(xpath = "//input[@type='checkbox']")
+    public WebElement rememberCheckbox;
+
+    @FindBy(xpath = "//a[.='Forgot your password?']")
+    public WebElement forgotLink;
 
 
 
