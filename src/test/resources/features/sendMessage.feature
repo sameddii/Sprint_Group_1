@@ -15,7 +15,7 @@ Feature:
     Given the user is on the login page
 
   @working1
-  Scenario Template: Verify login with valid credentials
+  Scenario Template: verify user is able to send message
     When the user logs in as "<user type>"
     And user clicks message area
     When user should be able to type "<message>"
@@ -29,7 +29,7 @@ Feature:
 
 
   @working2
-  Scenario Template: Verify login with valid credentials
+  Scenario Template: verify user is able to cancel message
     When the user logs in as "<user type>"
     And user clicks message area
     Then user should be able to type "<message>" and cancel it
