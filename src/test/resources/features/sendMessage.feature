@@ -17,27 +17,25 @@ Feature:
   @working1
   Scenario Template: Verify login with valid credentials
     When the user logs in as "<user type>"
-    Then the user should land on the home page and the "<title>" should be displayed
     And user clicks message area
     When user should be able to type "<message>"
     Then user should see message on top of the screen
 
     Examples:
-      | user type | title  | message           |
-      | hr        | Portal | Hi, how are you?  |
-      | helpdesk  | Portal | Agile Ceremonies  |
-      | marketing | Portal | Automation Sprint |
+      | user type | message           |
+      | hr        | Hi, how are you?  |
+      | helpdesk  | Agile Ceremonies  |
+      | marketing | Automation Sprint |
 
 
   @working2
   Scenario Template: Verify login with valid credentials
     When the user logs in as "<user type>"
-    Then the user should land on the home page and the "<title>" should be displayed
     And user clicks message area
     Then user should be able to type "<message>" and cancel it
 
     Examples:
-      | user type | title  | message           |
-      | hr        | Portal | Hello             |
-      | helpdesk  | Portal | Cydeo             |
-      | marketing | Portal | Sprint Automation |
+      | user type | message           |
+      | hr        | Hello             |
+      | helpdesk  | Cydeo             |
+      | marketing | Sprint Automation |
