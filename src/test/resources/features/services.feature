@@ -6,20 +6,23 @@ Feature: Services page feature
   2. User should be able to access the FAQ documents.
   User types: helpdesk, marketing, hr
 
-@services_modules
+  Background:
+    Given the user is on the login page
+
+  @services_modules
   Scenario Outline: Verify that users are able to see the 11 modules on the “Services” page shown as the design document.
-    Given "<user type>" user is logged in and launched on the home page
+    When the user logs in as "<user type>"
     When user navigates to Services tab on the home page
-    Then user sees "11" modules in top menu
+    Then user sees 11 modules in top menu
     Examples:
       | user type |
       | hr        |
       | helpdesk  |
       | marketing |
 
-@services_faq
+  @services_faq
   Scenario Outline: Verify that users are able to access the FAQ documents.
-    Given "<user type>" user is logged in and launched on the home page
+    When the user logs in as "<user type>"
     When user navigates to Services tab on the home page
     And user navigates to FAQ module
     Then user sees FAQ documents on the FAQ page

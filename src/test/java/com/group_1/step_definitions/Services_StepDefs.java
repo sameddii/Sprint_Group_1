@@ -17,12 +17,6 @@ public class Services_StepDefs {
     LoginPage loginPage = new LoginPage();
     ServicesPage servicesPage = new ServicesPage();
 
-    @Given("{string} user is logged in and launched on the home page")
-    public void userIsLoggedInAndLaunchedOnTheHomePage(String userType) {
-        driver.get(ConfigurationReader.getProperty("url"));
-        loginPage.login(userType);
-    }
-
     @When("user navigates to Services tab on the home page")
     public void user_navigates_to_services_tab_on_the_home_page() {
         servicesPage.servicesTab.click();
@@ -30,9 +24,9 @@ public class Services_StepDefs {
 
     }
 
-    @Then("user sees {string} modules in top menu")
-    public void user_sees_modules_in_top_menu(String expectedNumberOfModules) {
-        String actualNumberOfModules = "" + servicesPage.servicesModules.size();
+    @Then("user sees {int} modules in top menu")
+    public void user_sees_modules_in_top_menu(int expectedNumberOfModules) {
+        int actualNumberOfModules = servicesPage.servicesModules.size();
         Assert.assertEquals("Expected number of modules in the top menu was " + expectedNumberOfModules +
                 ", but found " + actualNumberOfModules, expectedNumberOfModules, actualNumberOfModules);
     }
@@ -52,4 +46,5 @@ public class Services_StepDefs {
 
 
     }
+
 }
