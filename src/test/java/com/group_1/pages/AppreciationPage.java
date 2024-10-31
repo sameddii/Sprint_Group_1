@@ -25,7 +25,7 @@ public class AppreciationPage {
     @FindBy(xpath = "//button[@id='blog-submit-button-save']")
     public WebElement sendButton;
 
-    @FindBy(xpath = "//div[@id='blog_post_body_552']")
+    @FindBy(xpath = "(//div[@class='feed-post-text-block-inner-inner'])[1]")
     public WebElement consoleMessage;
 }
 
