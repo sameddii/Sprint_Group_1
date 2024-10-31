@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 public class AppreciationStepDefs {
@@ -46,7 +47,11 @@ public class AppreciationStepDefs {
     @Then("user should see the message displayed on the feed")
     public void user_should_see_the_message_displayed_on_the_feed() {
         WebElement message = appreciationPage.consoleMessage;
-        Assert.assertTrue(message.isDisplayed());
+        try {
+            Assert.assertTrue(message.isDisplayed());
+        }catch (StaleElementReferenceException e) {
+            Assert.assertTrue(message.isDisplayed());
+        }
 
     }
 }
