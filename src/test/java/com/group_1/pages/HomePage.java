@@ -25,7 +25,7 @@ public class HomePage {
     @FindBy(xpath = "//body[@contenteditable='true']")
     public WebElement inputMessage;
 
-    @FindBy(xpath = "//div[contains(@id,'blg-post-img-')]//div[3]/div[1]")
+    @FindBy(xpath = "(//div[contains(@id,'blg-post-img-')]//div[3]/div[1])[1]")
     public WebElement messageEntered;
 
     @FindBy(xpath = "//button[@id='blog-submit-button-cancel']")
