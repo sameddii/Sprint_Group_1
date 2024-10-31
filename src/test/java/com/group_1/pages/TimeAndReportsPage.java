@@ -15,16 +15,15 @@ public class TimeAndReportsPage {
     }
 
 
-    @FindBy(xpath = "//a[.='Time and Reports']")
+    @FindBy(xpath = "//a[@title='Time and Reports']")
     public WebElement timeAndReportsButton;
-
 
 
     @FindBy(xpath = "//div[@data-locked='false']")
     public List<WebElement> modules;
 
 
-    @FindBy(xpath = "//a[.='Worktime']")
+    @FindBy(xpath = "//span[.='Worktime']")
     public WebElement worktimeModule;
 
 

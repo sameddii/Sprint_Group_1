@@ -9,6 +9,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,14 +21,14 @@ public class TimeAndReports_StepDefinitions {
 
 
     TimeAndReportsPage timeAndReportsPage = new TimeAndReportsPage();
+    SoftAssertions softly = new SoftAssertions();
 
 
 
     @When("user goes to Time and Reports page")
     public void user_goes_to_time_and_reports_page() {
 
-        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-        js.executeScript("arguments[0].click();", timeAndReportsPage.timeAndReportsButton);
+        timeAndReportsPage.timeAndReportsButton.click();
 
     }
 
@@ -38,33 +39,44 @@ public class TimeAndReports_StepDefinitions {
 
         int actualModuleNumber = timeAndReportsPage.modules.size();
 
-        Assert.assertEquals(expectedModuleNumber,actualModuleNumber);
+        //Assert.assertEquals(expectedModuleNumber,actualModuleNumber);
+
+        softly.assertThat(actualModuleNumber).isEqualTo(expectedModuleNumber);
+
 
 
         for (WebElement eachModule : timeAndReportsPage.modules) {
-            Assert.assertTrue( eachModule.isDisplayed());
+
+            //Assert.assertTrue( eachModule.isDisplayed());
+
+            softly.assertThat(eachModule.isDisplayed()).isTrue();
 
         }
 
-    }
+        softly.assertAll();
 
+    }
 
 
 
     @And("user navigates to Worktime module")
     public void userNavigatesToWorktimeModule() {
 
-        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-        js.executeScript("arguments[0].click();", timeAndReportsPage.worktimeModule);
+        timeAndReportsPage.worktimeModule.click();
 
     }
+
 
     @Then("user sees {int} checkboxes on the Worktime module.")
     public void userSeeCheckboxesOnTheWorktimeModule(int expectedCheckboxNumber) {
 
         int actualCheckboxNumber = timeAndReportsPage.worktimeCheckboxes.size();
 
-        Assert.assertEquals(expectedCheckboxNumber,actualCheckboxNumber);
+        //Assert.assertEquals(expectedCheckboxNumber,actualCheckboxNumber);
+
+        softly.assertThat(actualCheckboxNumber).isEqualTo(expectedCheckboxNumber);
+
+        softly.assertAll();
 
 
     }
@@ -73,7 +85,11 @@ public class TimeAndReports_StepDefinitions {
     @Then("user sees ‘Statistics’ checkbox selected by default")
     public void userSeesStatisticsCheckboxSelectedByDefault() {
 
-        Assert.assertTrue(timeAndReportsPage.statisticCheckbox.isSelected());
+        //Assert.assertTrue(timeAndReportsPage.statisticCheckbox.isSelected());
+
+        softly.assertThat(timeAndReportsPage.statisticCheckbox.isSelected()).isTrue();
+
+        softly.assertAll();
 
     }
 

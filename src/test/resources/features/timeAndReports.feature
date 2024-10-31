@@ -11,40 +11,16 @@ Feature: Time and Reports Page functionality
   Background:
   Given the user is on the login page
 
-  Scenario Outline: Verify user can see "Time and Reports" page contains 5 modules.
+  Scenario Outline: Verify user can access to "Time and Reports" Menu
     When the user logs in as "<user type>"
     And user goes to Time and Reports page
     Then user should see 5 modules on the page
+    And user navigates to Worktime module
+    Then user sees 2 checkboxes on the Worktime module.
+    Then user sees ‘Statistics’ checkbox selected by default
 
     Examples:
       | user type |
       | hr        |
       | helpdesk  |
       | marketing |
-
-
-    Scenario Outline: Verify user can see 2 checkboxes on the "Worktime" module.
-      When the user logs in as "<user type>"
-      And user goes to Time and Reports page
-      And user navigates to Worktime module
-      Then user sees 2 checkboxes on the Worktime module.
-
-      Examples:
-        | user type |
-        | hr        |
-        | helpdesk  |
-        | marketing |
-
-
-      Scenario Outline:Verify user can see the ‘Statistics’ checkbox selected by default on the "Worktime" module.
-        When the user logs in as "<user type>"
-        And user goes to Time and Reports page
-        And user navigates to Worktime module
-        Then user sees ‘Statistics’ checkbox selected by default
-
-
-        Examples:
-          | user type |
-          | hr        |
-          | helpdesk  |
-          | marketing |
