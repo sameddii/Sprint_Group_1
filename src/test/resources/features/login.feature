@@ -15,7 +15,7 @@ Feature: Login Functionality
   Background:
     Given the user is on the login page
 
-
+  @login
   Scenario Template: Verify login with valid credentials
     When the user logs in as "<user type>"
     Then the user should land on the home page and the "<title>" should be displayed
