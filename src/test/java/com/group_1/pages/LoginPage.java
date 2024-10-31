@@ -58,6 +58,16 @@ public class LoginPage {
     }
 
 
+    //I don't know if I can create other WebElements in this page or do I need to create a new one?
+
+    //To check the Authorization text is displayed:
+    @FindBy(xpath = "//div[@class='log-popup-header']")
+    public WebElement header;
+
+    //To check the Forgot Password link:
+    @FindBy(xpath = "//a[@class='login-link-forgot-pass']")
+    public WebElement forgot;
+
 
 
 }
