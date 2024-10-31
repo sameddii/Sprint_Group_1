@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class HomePage {
 
     public HomePage (){
@@ -29,4 +31,15 @@ public class HomePage {
     @FindBy(xpath = "//button[@id='blog-submit-button-cancel']")
     public WebElement cancelButton;
 
+    @FindBy(xpath = "//span[@id='user-name']")
+    public WebElement userMenu;
+
+    @FindBy(xpath = "//div[@class='menu-popup-items']/a")
+    public List<WebElement> links;
+
+    @FindBy(xpath = "//div[@class='menu-popup-items']/span")
+    public List<WebElement> spans;
+
+    @FindBy(xpath = "//div[@class='menu-popup-items']/a/span[.='Log out']")
+    public WebElement logoutLink;
 }
