@@ -21,9 +21,6 @@ public class TaskPage {
     @FindBy(css = "input.login-btn")
     public WebElement loginButton;
 
-    @FindBy(xpath = "//span[@class ='logo-color']")
-    public WebElement logo24;
-
     @FindBy (xpath = "//span[text() ='Task']")
     public WebElement taskButton;
 

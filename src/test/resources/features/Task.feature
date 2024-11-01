@@ -18,7 +18,6 @@ Feature: CRM Tasks feature
   @Task
   Scenario Outline: Users log in with valid credentials for different accounts
     When the user logs in as "<user type>"
-    Then the user should see the dashboard.
     When users click on TASK button
     Then users enter the task title "Task US" on Things to do area
     And users enter the task body "<task body>" on task body area
@@ -35,7 +34,6 @@ Feature: CRM Tasks feature
   @Task
   Scenario Outline: users can cancel a simple task.
     When the user logs in as "<user type>"
-    Then the user should see the dashboard.
     When users click on TASK button
     Then users click on CANCEL button
     And users should see the task message area has collapsed

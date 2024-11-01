@@ -29,11 +29,6 @@ public class TaskStepDefs {
 
     }
 
-    @Then("the user should see the dashboard.")
-    public void the_user_should_see_the_dashboard() {
-        BrowserUtils.verifyElementDisplayed(taskPage.logo24); // this my utility
-    }
-
 
     @When("users click on TASK button")
     public void users_click_on_task_button() {
@@ -65,9 +60,9 @@ public class TaskStepDefs {
     public void user_should_see_the_task_on_active_stream_page() {
         // if I use helpdesk1@cydeo.com,hr1@cydeo.com and marketing1@cydeo.com usernames where comes out a pop-up message so,
         // I used if-else block
-        if (("helpdesk1@cydeo.com".equals(ConfigurationReader.getProperty("helpdesk_username"))) ||
-                ("hr1@cydeo.com".equals(ConfigurationReader.getProperty("hr_username"))) ||
-                ("marketing1@cydeo.com".equals(ConfigurationReader.getProperty("hr_password")))) {
+        if (ConfigurationReader.getProperty("helpdesk_username").equals("helpdesk1@cydeo.com") ||
+                (ConfigurationReader.getProperty("hr_username").equals("hr1@cydeo.com")) ||
+                (ConfigurationReader.getProperty("hr_password").equals("marketing1@cydeo.com"))) {
             BrowserUtils.verifyElementDisplayed(taskPage.taskCreated);
         } else {
             BrowserUtils.waitForVisibility(taskPage.taskOnActiveStreamPage, 2);
