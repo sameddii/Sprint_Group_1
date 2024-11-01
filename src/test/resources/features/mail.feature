@@ -1,4 +1,4 @@
-@email
+@All
 Feature: Mail Functionality
   User Story : As a user, I should be able to send email via the “Mail” page.
   Acceptance Criteria:
@@ -13,27 +13,21 @@ Feature: Mail Functionality
 
   @mail
   Scenario Outline:Verify that user can access to the “Mail” page.
-   Given the user logs in as "<user type>"
+    Given the user logs in as "<user type>"
     When the user should click on the mailbox
     Then Verify that "Use and manage your mailbox in Bitrix24" display
+
     Examples:
       | user type |
       | hr        |
-      | helpdesk  |
-      | marketing |
-@email
+
+  @email
   Scenario Outline: Verify email service providers on Mail page
     When the user logs in as "<user type>"
-    When the user should click on the mailbox
-  # Given the user should see the "Mailbox Integration" window
-   When the user should see 8 email service providers
-   Then the following email "<service providers>" should be displayed and clickable
-  Examples:
-    | user type |
-    | hr        |
-    | helpdesk  |
-    | marketing |
-  Examples:
+    And the user should click on the mailbox
+    Then the user should see the "Mailbox Integration" window
+    And the user should see 8 email service providers
+    And the following email service providers should be displayed
       | service providers |
       | Gmail             |
       | Outlook           |
@@ -43,3 +37,18 @@ Feature: Mail Functionality
       | Office365         |
       | Exchange          |
       | IMAP              |
+
+    Then the user should be able to click and see the logo of each email service provider
+      | logo               |
+      | gmail              |
+      | outlook.com        |
+      | icloud             |
+      | office365          |
+      | exchange           |
+      | yahoo              |
+      | aol                |
+      | other              |
+
+    Examples:
+      | user type |
+      | hr        |
