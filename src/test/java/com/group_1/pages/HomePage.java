@@ -42,4 +42,7 @@ public class HomePage {
 
     @FindBy(xpath = "//div[@class='menu-popup-items']/a/span[.='Log out']")
     public WebElement logoutLink;
+
+    @FindBy(xpath = "//ul[@id='left-menu-list']/li[13]")
+    public WebElement companyLink;
 }
