@@ -21,11 +21,6 @@ public class CompanyStepDefs {
     public void user_sees_modules_in_the_page(Integer modules) {
 
         int allModules = companyPage.companyModules.size();
-        System.out.println("allModules = " + allModules);
-
-        for (WebElement mods : companyPage.companyModules) {
-            System.out.println("Modules = " + mods.getText());
-        }
         Assert.assertTrue(allModules == 7);
 
 
