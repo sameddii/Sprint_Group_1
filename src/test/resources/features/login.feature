@@ -56,6 +56,9 @@ Feature: Login Functionality
       |           |                  | Please fill out this field |
 
 
+
+
+
   Scenario: Verify "Remember me" option is visible and clickable
     Then the "Remember me on this computer" text should be visible
     When the user clicks the Remember me checkbox
@@ -65,6 +68,8 @@ Feature: Login Functionality
   Scenario: Verify password is hidden by default
     When the user enters a password
     Then the password should be masked with bullets by default
+
+
 
 
 
