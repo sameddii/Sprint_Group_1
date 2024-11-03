@@ -3,6 +3,7 @@ package com.group_1.step_definitions;
 import com.group_1.pages.PollPage;
 import com.group_1.utilities.BrowserUtils;
 import com.group_1.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -24,32 +25,32 @@ public class Poll_StepDefinitions {
     }
 
 
-    @When("user creates a poll with a question and two answers")
-    public void user_creates_a_poll_with_a_question_and_answers() {
+    @And("user enters a {string}, {string}, {string} and {string}")
+    public void userEntersAAnd(String title, String question, String answer1, String answer2) {
+
 
         Driver.getDriver().switchTo().frame(pollPage.iframeElement);
 
-        pollPage.messageBox.sendKeys("Message");
+        pollPage.messageBox.sendKeys(title);
 
         Driver.getDriver().switchTo().defaultContent();
 
-        pollPage.questionBox.sendKeys("Question");
+        pollPage.questionBox.sendKeys(question);
 
-        pollPage.answer1.sendKeys("Answer 1");
+        pollPage.answer1.sendKeys(answer1);
 
-        pollPage.answer2.sendKeys("Answer 2");
+        pollPage.answer2.sendKeys(answer2);
 
         pollPage.sendButton.click();
 
     }
-
 
     @Then("user sees the poll in the feed")
     public void userSeesThePollInTheFeed() {
 
         Driver.getDriver().navigate().refresh();
 
-       Assert.assertTrue(pollPage.pollInTheFeed.isDisplayed());
+        Assert.assertTrue(pollPage.pollInTheFeed.isDisplayed());
 
     }
 
@@ -67,7 +68,6 @@ public class Poll_StepDefinitions {
         Assert.assertFalse(pollPage.questionBox.isDisplayed());
 
     }
-
 
 
 }
