@@ -26,9 +26,6 @@ public class EmailPage {
     @FindBy(xpath = "//div[@class='mail-add-list']/a")
     public List<WebElement> emailProvidersList;
 
-    @FindBy(xpath = "((//a[@class='mail-add-item'])[1] | (//a[@class='mail-add-item'])[2] | (//a[@class='mail-add-item'])[3] | (//a[@class='mail-add-item'])[4] | (//a[@class='mail-add-item'])[6] | (//a[@class='mail-add-item'])[7] | (//a[@class='mail-add-item'])[8])")
-    public List<WebElement> logoElements;
-
     @FindBy(xpath = "//img[@class='mail-connect-img']")
     public List<WebElement> emailSevProList;
 

@@ -35,7 +35,7 @@ public class EmailStepDefs {
     @Then("the following email service providers should be displayed")
     public void the_following_email_service_providers_should_be_displayed(List<String> expectedLogoElements) {
 
-        for (int i = 0; i < emailPage.logoElements.size() + 1; i++) {
+        for (int i = 0; i < emailPage.emailSevProList.size() + 1; i++) {
 
             emailPage.emailProvidersList.get(i).click();
             BrowserUtils.sleep(2);
@@ -55,12 +55,12 @@ public class EmailStepDefs {
 
         List<String> actualImgList = BrowserUtils.getElementsText(emailPage.emailSevProList);
 
-        for (int i = 0; i < emailPage.emailSevProList.size() - 1; i++) {
+        for (int i = 0; i < actualImgList.size() - 1; i++) {
 
-            softly.assertThat(emailPage.logoElements.get(i).getAttribute("alt")).isEqualTo(expectedAltImgList.get(i));
+            softly.assertThat(emailPage.emailProvidersList.get(i).getAttribute("alt")).isEqualTo(expectedAltImgList.get(i));
         }
 
-        softly.assertThat(emailPage.logoElements.get(emailPage.logoElements.size() - 1).getAttribute("alt")).isNull();
+        softly.assertThat(emailPage.emailProvidersList.get(emailPage.emailProvidersList.size() - 1).getAttribute("alt")).isNull();
 
         softly.assertAll();
 
