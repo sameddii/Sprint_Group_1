@@ -51,9 +51,10 @@ public class LoginAccess_StepDefinitions {
 
     @Then("user should see {string} text displayed on the login button")
     public void userShouldSeeTextDisplayedOnTheLoginButton(String expectedLoginText) {
-        String actualLoginText=loginPage.submit.getText();
+        //String actualLoginText=loginPage.submit.getText();
+        String actualLoginText= loginPage.submit.getAttribute("value");
         assertEquals(expectedLoginText, actualLoginText);
-    } //Error Question
+    }
 
     @Then("user can click on the Log In button")
     public void userCanClickOnTheLogInButton() {
