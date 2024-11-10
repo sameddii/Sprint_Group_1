@@ -20,6 +20,8 @@ Feature: Mail Functionality
     Examples:
       | user type |
       | hr        |
+      | helpdesk  |
+      | marketing |
 
   @email
   Scenario Outline: Verify email service providers on Mail page
@@ -28,7 +30,6 @@ Feature: Mail Functionality
     Then the user should see the "Mailbox Integration" window
     And the user should see 8 email service providers
     And the following email service providers should be displayed
-      | service providers |
       | Gmail             |
       | Outlook           |
       | Yahoo             |
@@ -39,7 +40,6 @@ Feature: Mail Functionality
       | IMAP              |
 
     Then the user should be able to click and see the logo of each email service provider
-      | logo               |
       | gmail              |
       | outlook.com        |
       | icloud             |
@@ -52,3 +52,5 @@ Feature: Mail Functionality
     Examples:
       | user type |
       | hr        |
+      | helpdesk  |
+      | marketing |
