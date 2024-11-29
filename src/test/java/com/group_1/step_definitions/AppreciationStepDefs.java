@@ -22,7 +22,7 @@ public class AppreciationStepDefs {
     }
     @When("user logs in as {string}")
     public void user_logs_in_as(String userType) {
-        loginPage.login(userType);;
+        loginPage.login(userType);
     }
     @When("user clicks the more menu")
     public void user_clicks_the_more_menu() {
